@@ -353,9 +353,12 @@ void loop() {
         foutje = myUVSensor.setOperationMode(DEVICE_MODE_CFG);
         foutje = myUVSensor.setGain(UVgainOptions[UVGain] );
         foutje = myUVSensor.setOperationMode(DEVICE_MODE_MEAS);
-            
-    printgainUV(); Serial.print(UVGain);Serial.print("BUTTON_LEFT  "); Serial.println(myUVSensor.getUVA());   
+
+    #if DEBUGMODE       
+    printgainUV(); Serial.print(UVGain);Serial.print("BUTTON_LEFT  "); Serial.println(myUVSensor.getUVA());
+    #endif   
     }
+    
     if ( !digitalRead(BUTTON_RIGHT )) { 
         delay(200);
         if (UVGain > 0 ) UVGain-- ;
@@ -363,7 +366,9 @@ void loop() {
         foutje = myUVSensor.setOperationMode(DEVICE_MODE_CFG);
         foutje = myUVSensor.setGain(UVgainOptions[UVGain] );
         foutje = myUVSensor.prepareMeasurement(MEAS_MODE_CMD);
-        printgainUV(); Serial.print(UVGain); Serial.print("BUTTON_RIGHT  "); Serial.println(myUVSensor.getUVA());   
+        #if DEBUGMODE
+        printgainUV(); Serial.print(UVGain); Serial.print("BUTTON_RIGHT  "); Serial.println(myUVSensor.getUVA()); 
+        #endif  
     }
 
 
